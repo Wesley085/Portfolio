@@ -1,403 +1,277 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
 
 const resources = {
-    pt: {
-        translation: {
-            nav: {
-                about: "Sobre",
-                skills: "Skills",
-                experience: "Experiência",
-                contact: "Contato",
-                talkToMe: "Fale comigo"
-            },
-            hero: {
-                greeting: "👋 Olá, mundo! Eu sou",
-                rolePrefix: "> ",
-                roles: ["Desenvolvedor Web", "PHP & Laravel", "React Developer", "WordPress Expert"],
-                description: "Técnico em Desenvolvimento de Sistemas com experiência em projetos reais — desde startups na Espanha até sistemas de gestão pública. Focado em soluções eficientes, escaláveis e com ótima experiência de usuário.",
-                ctaExperience: "Ver Experiências",
-                ctaContact: "Entre em Contato",
-                scroll: "SCROLL"
-            },
-            about: {
-                title: "Sobre mim",
-                p1: "Sou <1>Wesley dos Santos Silva</1>, desenvolvedor web com formação técnica em Desenvolvimento de Sistemas e graduação em andamento em Análise e Desenvolvimento de Sistemas (ADS) pela Uninassau.",
-                p2: "Tenho experiência prática em projetos reais — desde o desenvolvimento de APIs em tempo real para uma startup espanhola até a modernização de sistemas de gestão pública com <1>Laravel</1>. Também atuo como professor de informática, compartilhando conhecimento com novas turmas.",
-                p3: "Meu foco é criar soluções que combinem <1> performance</1>, <2> segurança</2> e uma excelente <3> experiência de usuário</3>. Estou aberto a oportunidades presenciais, híbridas ou remotas.",
-                badge: "FULL STACK DEV",
-                stats: {
-                    years: "Anos de estudo",
-                    companies: "Empresas atendidas",
-                    technologies: "Tecnologias",
-                    learning: "Vontade de aprender"
-                }
-            },
-            skills: {
-                title: "Habilidades",
-                categories: {
-                    languages: "Linguagens",
-                    frameworks: "Frameworks & Libs",
-                    tools: "Plataformas & Ferramentas"
-                },
-                techsUsed: "tecnologias que já usei"
-            },
-            experience: {
-                sectionTitle: "03. Experiência",
-                title: "Experiência Profissional",
-                current: "Atual",
-                education: {
-                    title: "Formação Acadêmica",
-                    inProgress: "Em andamento"
-                },
-                jobs: [
-                    {
-                        company: "OneCommerce",
-                        location: "Startup — Espanha 🇪🇸",
-                        role: "Desenvolvedor Web",
-                        period: "Fev 2025 — Atual",
-                        description: [
-                            "Desenvolvimento PHP especializado em WordPress com Composer, temas e plugins customizados.",
-                            "Desenvolvimento frontend com React.js, focado em performance e segurança.",
-                            "Redução de dependências externas e otimização do carregamento."
-                        ]
-                    },
-                    {
-                        company: "GestCloud",
-                        location: "Cristino Castro, PI 🇧🇷",
-                        role: "Desenvolvedor Web",
-                        period: "Out 2025 — Atual",
-                        description: [
-                            "Liderança na migração de aplicações legadas (Desktop/Firebird) para arquitetura web moderna com Laravel.",
-                            "Integração via API entre sistemas de Almoxarifado e Licitações, automatizando dados contratuais.",
-                            "Desenvolvimento de Landing Page institucional e otimização de UI/UX no sistema de Contracheques."
-                        ]
-                    },
-                    {
-                        company: "Alfa Cursos Profissionalizantes",
-                        location: "Pacajus, CE 🇧🇷",
-                        role: "Professor de Informática",
-                        period: "Out 2025 — Atual",
-                        description: [
-                            "Elaboração de atividades práticas e conteúdos sobre informática básica e pacote Office.",
-                            "Condução de treinamentos iniciais para turmas de diferentes áreas profissionalizantes.",
-                            "Apoio didático e criação de materiais de aprendizado."
-                        ]
-                    },
-                    {
-                        company: "Somos Octa",
-                        location: "São Paulo, SP 🇧🇷",
-                        role: "Desenvolvedor Web",
-                        period: "Mai 2025 — Nov 2025",
-                        description: [
-                            "Manutenção e evolução do projeto Empório Naval, implementando novas funcionalidades.",
-                            "Reestruturação da lógica de pagamentos para suportar múltiplos gateways, incluindo gateway interno.",
-                            "Correções e melhorias estruturais no sistema."
-                        ]
-                    },
-                    {
-                        company: "OneCommerce",
-                        location: "Startup — Espanha 🇪🇸",
-                        role: "Desenvolvedor Web",
-                        period: "Set 2024 — Jan 2025",
-                        description: [
-                            "Desenvolvimento de API para aplicativo de mensagens em tempo real (OneChat).",
-                            "Implementação de comunicação via WebSocket para troca de mensagens em ambiente web."
-                        ]
-                    }
-                ],
-                academic: [
-                    {
-                        degree: "Técnico em Desenvolvimento de Sistemas",
-                        school: "Escola Técnica Estadual Adolfo Ferreira de Sousa",
-                        period: "2022 — 2024"
-                    },
-                    {
-                        degree: "Análise e Desenvolvimento de Sistemas (ADS)",
-                        school: "Uninassau SIA",
-                        period: "2025 — 2027"
-                    }
-                ]
-            },
-            contact: {
-                sectionTitle: "04. Contato",
-                title: "Vamos <1>trabalhar juntos?</1>",
-                description: "Estou aberto a oportunidades <1>presenciais</1>, <3>hibridas</3> ou <5>remotas</5>. Se você tem um projeto interessante ou uma vaga disponivel, minha caixa de entrada está sempre aberta!",
-                sayHello: "✉ Diga olá"
-            },
-            footer: {
-                developedBy: "Desenvolvido por"
-            }
-        }
+  pt: {
+    translation: {
+      nav: { about: "Sobre", experience: "Experiência", skills: "Habilidades", education: "Formação", contact: "Contato" },
+      hero: {
+        eyebrow: "Fortaleza, CE — híbrido e remoto",
+        role: "Técnico em Desenvolvimento de Sistemas e Desenvolvedor Web.",
+        intro: "Desenvolvo aplicações web em PHP/Laravel, React e Node.js, com foco em código fácil de manter e soluções que escalam.",
+        available: "Disponível para novas oportunidades",
+        card: { title: "ficha", location: "Local", now: "Agora", nowValue: "OneCommerce · Laravel, React, n8n", status: "Status", statusValue: "Aberto a híbrido e remoto", stack: "Stack", theme: "Tema" },
+        cta: "Entrar em contato",
+        cv: "Ver experiência",
+      },
+      about: {
+        title: "Sobre",
+        p1: "Atuo como desenvolvedor web desde 2024, trabalhando com uma startup espanhola, e-commerce e projetos de integração. Meu dia a dia passa por manter e evoluir sistemas em Laravel, construir interfaces em React e automatizar processos com n8n.",
+        p2: "Meu objetivo é aplicar o que sei sobre desenvolvimento web para criar soluções eficientes, escaláveis e de fácil manutenção, contribuindo com a equipe e com os projetos da empresa.",
+        p3: "Também já fui professor de informática, o que me ajudou a explicar bem o que faço e a trabalhar com pessoas de áreas diferentes.",
+      },
+      experience: {
+        title: "Experiência",
+        present: "Atual",
+        jobs: [
+          {
+            company: "OneCommerce",
+            context: "Startup, Espanha · Remoto",
+            role: "Desenvolvedor Web (PJ)",
+            period: "Fev 2026 — Atual",
+            points: [
+              "Manutenção e evolução contínua de aplicações em PHP/Laravel, com novas funcionalidades e otimização de código legado.",
+              "Soluções com Node.js e React, além de integrações e automações de processos com n8n.",
+              "Gestão, manutenção e atualização de projetos WordPress estruturados via Composer.",
+            ],
+          },
+          {
+            company: "Alfa Cursos Profissionalizantes",
+            context: "Pacajus, CE",
+            role: "Professor de Informática",
+            period: "Out 2025 — Jan 2026",
+            points: [
+              "Atividades práticas e conteúdos introdutórios de informática e pacote Office para turmas de diferentes áreas.",
+              "Treinamentos iniciais sobre uso de computadores e apoio didático aos cursos profissionalizantes.",
+            ],
+          },
+          {
+            company: "Somos Octa",
+            context: "São Paulo, SP",
+            role: "Desenvolvedor Web",
+            period: "Mai 2025 — Nov 2025",
+            points: [
+              "Manutenção e evolução do projeto Empório Naval: novas funcionalidades, correções e melhorias estruturais.",
+              "Reestruturação da lógica de pagamentos para suportar múltiplos gateways, incluindo um gateway interno.",
+            ],
+          },
+          {
+            company: "OneCommerce",
+            context: "Startup, Espanha · Remoto",
+            role: "Desenvolvedor Web",
+            period: "Set 2024 — Jan 2025",
+            points: ["Desenvolvimento da API do OneChat, aplicativo de mensagens em tempo real com comunicação via WebSocket."],
+          },
+        ],
+      },
+      skills: {
+        title: "Habilidades",
+        groups: [
+          { name: "Linguagens", items: ["HTML", "CSS", "JavaScript", "PHP", "C#", "MySQL"] },
+          { name: "Frameworks e ferramentas", items: ["Laravel", ".NET", "React.js", "Node.js", "Tailwind CSS", "Bootstrap", "WordPress", "n8n"] },
+        ],
+      },
+      education: {
+        title: "Formação",
+        items: [
+          { degree: "Análise e Desenvolvimento de Sistemas (ADS)", school: "Uninassau", period: "2025 — 2027", note: "Em andamento" },
+          { degree: "Técnico em Desenvolvimento de Sistemas", school: "EEEP Adolfo Ferreira de Sousa", period: "2022 — 2024", note: "" },
+        ],
+      },
+      contact: {
+        title: "Vamos conversar",
+        text: "Estou aberto a oportunidades híbridas ou remotas. Se você tem um projeto ou uma vaga em que eu possa ajudar, escreva para mim.",
+        email: "E-mail",
+        phone: "Telefone",
+        location: "Localização",
+      },
+      footer: { rights: "Wesley dos Santos Silva" },
     },
-    en: {
-        translation: {
-            nav: {
-                about: "About",
-                skills: "Skills",
-                experience: "Experience",
-                contact: "Contact",
-                talkToMe: "Talk to me"
-            },
-            hero: {
-                greeting: "👋 Hello, world! I am",
-                rolePrefix: "> ",
-                roles: ["Web Developer", "PHP & Laravel", "React Developer", "WordPress Expert"],
-                description: "Systems Development Technician with experience in real projects — from startups in Spain to public management systems. Focused on efficient, scalable solutions with great user experience.",
-                ctaExperience: "See Experience",
-                ctaContact: "Get in Touch",
-                scroll: "SCROLL"
-            },
-            about: {
-                title: "About me",
-                p1: "I am <1>Wesley dos Santos Silva</1>, a web developer with a technical background in Systems Development and currently pursuing a degree in Systems Analysis and Development (ADS) at Uninassau.",
-                p2: "I have practical experience in real projects — from developing real-time APIs for a Spanish startup to modernizing public management systems with <1>Laravel</1>. I also work as a computer science teacher, sharing knowledge with new classes.",
-                p3: "My focus is on creating solutions that combine <1> performance</1>, <2> security</2> and an excellent <3> user experience</3>. I am open to on-site, hybrid, or remote opportunities.",
-                badge: "FULL STACK DEV",
-                stats: {
-                    years: "Years of study",
-                    companies: "Companies served",
-                    technologies: "Technologies",
-                    learning: "Willingness to learn"
-                }
-            },
-            skills: {
-                title: "Skills",
-                categories: {
-                    languages: "Languages",
-                    frameworks: "Frameworks & Libs",
-                    tools: "Platforms & Tools"
-                },
-                techsUsed: "technologies I've used"
-            },
-            experience: {
-                sectionTitle: "03. Experience",
-                title: "Professional Experience",
-                current: "Current",
-                education: {
-                    title: "Education",
-                    inProgress: "In progress"
-                },
-                jobs: [
-                    {
-                        company: "OneCommerce",
-                        location: "Startup — Spain 🇪🇸",
-                        role: "Web Developer",
-                        period: "Feb 2025 — Present",
-                        description: [
-                            "PHP development specialized in WordPress with Composer, custom themes and plugins.",
-                            "Frontend development with React.js, focused on performance and security.",
-                            "Reduction of external dependencies and loading optimization."
-                        ]
-                    },
-                    {
-                        company: "GestCloud",
-                        location: "Cristino Castro, PI 🇧🇷",
-                        role: "Web Developer",
-                        period: "Oct 2025 — Present",
-                        description: [
-                            "Leadership in migrating legacy applications (Desktop/Firebird) to modern web architecture with Laravel.",
-                            "API integration between Warehouse and Bidding systems, automating contractual data.",
-                            "Development of institutional Landing Page and UI/UX optimization in the Payroll system."
-                        ]
-                    },
-                    {
-                        company: "Alfa Vocational Courses",
-                        location: "Pacajus, CE 🇧🇷",
-                        role: "IT Teacher",
-                        period: "Oct 2025 — Present",
-                        description: [
-                            "Preparation of practical activities and content on basic computing and Office package.",
-                            "Conducting initial training for classes in different vocational areas.",
-                            "Didactic support and creation of learning materials."
-                        ]
-                    },
-                    {
-                        company: "Somos Octa",
-                        location: "São Paulo, SP 🇧🇷",
-                        role: "Web Developer",
-                        period: "May 2025 — Nov 2025",
-                        description: [
-                            "Maintenance and evolution of the Empório Naval project, implementing new functionalities.",
-                            "Restructuring of payment logic to support multiple gateways, including internal gateway.",
-                            "Structural corrections and improvements to the system."
-                        ]
-                    },
-                    {
-                        company: "OneCommerce",
-                        location: "Startup — Spain 🇪🇸",
-                        role: "Web Developer",
-                        period: "Sep 2024 — Jan 2025",
-                        description: [
-                            "API development for real-time messaging application (OneChat).",
-                            "Implementation of WebSocket communication for message exchange in web environment."
-                        ]
-                    }
-                ],
-                academic: [
-                    {
-                        degree: "Systems Development Technician",
-                        school: "Adolfo Ferreira de Sousa State Technical School",
-                        period: "2022 — 2024"
-                    },
-                    {
-                        degree: "Systems Analysis and Development (ADS)",
-                        school: "Uninassau SIA",
-                        period: "2025 — 2027"
-                    }
-                ]
-            },
-            contact: {
-                sectionTitle: "04. Contact",
-                title: "Let's <1>work together?</1>",
-                description: "I am open to <1>on-site</1>, <3>hybrid</3> or <5>remote</5> opportunities. If you have an interesting project or an open position, my inbox is always open!",
-                sayHello: "✉ Say Hello"
-            },
-            footer: {
-                developedBy: "Developed by"
-            }
-        }
+  },
+  en: {
+    translation: {
+      nav: { about: "About", experience: "Experience", skills: "Skills", education: "Education", contact: "Contact" },
+      hero: {
+        eyebrow: "Fortaleza, Brazil — hybrid and remote",
+        role: "Systems Development Technician and Web Developer.",
+        intro: "I build web applications with PHP/Laravel, React and Node.js, focused on maintainable code and solutions that scale.",
+        available: "Available for new opportunities",
+        card: { title: "profile", location: "Location", now: "Now", nowValue: "OneCommerce · Laravel, React, n8n", status: "Status", statusValue: "Open to hybrid and remote", stack: "Stack", theme: "Theme" },
+        cta: "Get in touch",
+        cv: "See experience",
+      },
+      about: {
+        title: "About",
+        p1: "I've worked as a web developer since 2024, with a Spanish startup, e-commerce and integration projects. My day-to-day covers maintaining and evolving Laravel systems, building React interfaces and automating processes with n8n.",
+        p2: "My goal is to apply what I know about web development to build efficient, scalable and maintainable solutions, contributing to the team and the company's projects.",
+        p3: "I've also taught computer classes, which taught me to explain my work clearly and to collaborate with people from different fields.",
+      },
+      experience: {
+        title: "Experience",
+        present: "Current",
+        jobs: [
+          {
+            company: "OneCommerce",
+            context: "Startup, Spain · Remote",
+            role: "Web Developer (contractor)",
+            period: "Feb 2026 — Present",
+            points: [
+              "Ongoing maintenance and evolution of PHP/Laravel applications, shipping new features and optimizing legacy code.",
+              "Solutions with Node.js and React, plus integrations and process automation with n8n.",
+              "Managing, maintaining and updating WordPress projects structured with Composer.",
+            ],
+          },
+          {
+            company: "Alfa Cursos Profissionalizantes",
+            context: "Pacajus, CE",
+            role: "Computer Science Teacher",
+            period: "Oct 2025 — Jan 2026",
+            points: [
+              "Practical activities and introductory content on computing and Office for classes from different fields.",
+              "Introductory training on computer use and teaching support for vocational courses.",
+            ],
+          },
+          {
+            company: "Somos Octa",
+            context: "São Paulo, SP",
+            role: "Web Developer",
+            period: "May 2025 — Nov 2025",
+            points: [
+              "Maintenance and evolution of the Empório Naval project: new features, fixes and structural improvements.",
+              "Restructured payment logic to support multiple gateways, including an in-house gateway.",
+            ],
+          },
+          {
+            company: "OneCommerce",
+            context: "Startup, Spain · Remote",
+            role: "Web Developer",
+            period: "Sep 2024 — Jan 2025",
+            points: ["Built the API for OneChat, a real-time messaging app using WebSocket communication."],
+          },
+        ],
+      },
+      skills: {
+        title: "Skills",
+        groups: [
+          { name: "Languages", items: ["HTML", "CSS", "JavaScript", "PHP", "C#", "MySQL"] },
+          { name: "Frameworks and tools", items: ["Laravel", ".NET", "React.js", "Node.js", "Tailwind CSS", "Bootstrap", "WordPress", "n8n"] },
+        ],
+      },
+      education: {
+        title: "Education",
+        items: [
+          { degree: "Systems Analysis and Development (ADS)", school: "Uninassau", period: "2025 — 2027", note: "In progress" },
+          { degree: "Systems Development Technician", school: "EEEP Adolfo Ferreira de Sousa", period: "2022 — 2024", note: "" },
+        ],
+      },
+      contact: {
+        title: "Let's talk",
+        text: "I'm open to hybrid or remote opportunities. If you have a project or a role where I can help, drop me a line.",
+        email: "Email",
+        phone: "Phone",
+        location: "Location",
+      },
+      footer: { rights: "Wesley dos Santos Silva" },
     },
-    es: {
-        translation: {
-            nav: {
-                about: "Sobre Mí",
-                skills: "Habilidades",
-                experience: "Experiencia",
-                contact: "Contacto",
-                talkToMe: "Hable conmigo"
-            },
-            hero: {
-                greeting: "👋 ¡Hola, mundo! Soy",
-                rolePrefix: "> ",
-                roles: ["Desarrollador Web", "PHP & Laravel", "React Developer", "Experto en WordPress"],
-                description: "Técnico en Desarrollo de Sistemas con experiencia en proyectos reales — desde startups en España hasta sistemas de gestión pública. Enfocado en soluciones eficientes, escalables y con gran experiencia de usuario.",
-                ctaExperience: "Ver Experiencia",
-                ctaContact: "Ponerse en Contacto",
-                scroll: "SCROLL"
-            },
-            about: {
-                title: "Sobre mí",
-                p1: "Soy <1>Wesley dos Santos Silva</1>, desarrollador web con formación técnica en Desarrollo de Sistemas y cursando la carrera de Análisis y Desarrollo de Sistemas (ADS) en Uninassau.",
-                p2: "Tengo experiencia práctica en proyectos reales — desde el desarrollo de APIs en tiempo real para una startup española hasta la modernización de sistemas de gestión pública con <1>Laravel</1>. También trabajo como profesor de informática, compartiendo conocimientos con nuevas clases.",
-                p3: "Mi enfoque es crear soluciones que combinen <1> rendimiento</1>, <2> seguridad</2> y una excelente <3> experiencia de usuario</3>. Estoy abierto a oportunidades presenciales, híbridas o remotas.",
-                badge: "FULL STACK DEV",
-                stats: {
-                    years: "Años de estudio",
-                    companies: "Empresas atendidas",
-                    technologies: "Tecnologías",
-                    learning: "Ganas de aprender"
-                }
-            },
-            skills: {
-                title: "Habilidades",
-                categories: {
-                    languages: "Lenguajes",
-                    frameworks: "Frameworks & Libs",
-                    tools: "Plataformas & Herramientas"
-                },
-                techsUsed: "tecnologías que he usado"
-            },
-            experience: {
-                sectionTitle: "03. Experiencia",
-                title: "Experiencia Profesional",
-                current: "Actual",
-                education: {
-                    title: "Formación Académica",
-                    inProgress: "En curso"
-                },
-                jobs: [
-                    {
-                        company: "OneCommerce",
-                        location: "Startup — España 🇪🇸",
-                        role: "Desarrollador Web",
-                        period: "Feb 2025 — Actualidad",
-                        description: [
-                            "Desarrollo PHP especializado en WordPress con Composer, temas y plugins personalizados.",
-                            "Desarrollo frontend con React.js, enfocado en rendimiento y seguridad.",
-                            "Reducción de dependencias externas y optimización de carga."
-                        ]
-                    },
-                    {
-                        company: "GestCloud",
-                        location: "Cristino Castro, PI 🇧🇷",
-                        role: "Desarrollador Web",
-                        period: "Oct 2025 — Actualidad",
-                        description: [
-                            "Liderazgo en la migración de aplicaciones heredadas (Desktop/Firebird) a arquitectura web moderna con Laravel.",
-                            "Integración vía API entre sistemas de Almacén y Licitaciones, automatizando datos contractuales.",
-                            "Desarrollo de Landing Page institucional y optimización de UI/UX en el sistema de Nóminas."
-                        ]
-                    },
-                    {
-                        company: "Alfa Cursos Profesionalizantes",
-                        location: "Pacajus, CE 🇧🇷",
-                        role: "Profesor de Informática",
-                        period: "Oct 2025 — Actualidad",
-                        description: [
-                            "Elaboración de actividades prácticas y contenidos sobre informática básica y paquete Office.",
-                            "Realización de capacitaciones iniciales para clases de diferentes áreas profesionales.",
-                            "Apoyo didáctico y creación de materiales de aprendizaje."
-                        ]
-                    },
-                    {
-                        company: "Somos Octa",
-                        location: "São Paulo, SP 🇧🇷",
-                        role: "Desarrollador Web",
-                        period: "May 2025 — Nov 2025",
-                        description: [
-                            "Mantenimiento y evolución del proyecto Empório Naval, implementando nuevas funcionalidades.",
-                            "Reestructuración de la lógica de pagos para soportar múltiples pasarelas, incluyendo pasarela interna.",
-                            "Correcciones y mejoras estructurales en el sistema."
-                        ]
-                    },
-                    {
-                        company: "OneCommerce",
-                        location: "Startup — España 🇪🇸",
-                        role: "Desarrollador Web",
-                        period: "Sep 2024 — Ene 2025",
-                        description: [
-                            "Desarrollo de API para aplicación de mensajería en tiempo real (OneChat).",
-                            "Implementación de comunicación vía WebSocket para intercambio de mensajes en entorno web."
-                        ]
-                    }
-                ],
-                academic: [
-                    {
-                        degree: "Técnico en Desarrollo de Sistemas",
-                        school: "Escuela Técnica Estatal Adolfo Ferreira de Sousa",
-                        period: "2022 — 2024"
-                    },
-                    {
-                        degree: "Análisis y Desarrollo de Sistemas (ADS)",
-                        school: "Uninassau SIA",
-                        period: "2025 — 2027"
-                    }
-                ]
-            },
-            contact: {
-                sectionTitle: "04. Contacto",
-                title: "¿Vamos a <1>trabajar juntos?</1>",
-                description: "Estoy abierto a oportunidades <1>presenciales</1>, <3>híbridas</3> o <5>remotas</5>. Si tienes un proyecto interesante o una vacante, ¡mi bandeja de entrada siempre está abierta!",
-                sayHello: "✉ Di hola"
-            },
-            footer: {
-                developedBy: "Desarrollado por"
-            }
-        }
-    }
+  },
+  es: {
+    translation: {
+      nav: { about: "Sobre mí", experience: "Experiencia", skills: "Habilidades", education: "Formación", contact: "Contacto" },
+      hero: {
+        eyebrow: "Fortaleza, Brasil — híbrido y remoto",
+        role: "Técnico en Desarrollo de Sistemas y Desarrollador Web.",
+        intro: "Desarrollo aplicaciones web con PHP/Laravel, React y Node.js, con foco en código mantenible y soluciones que escalan.",
+        available: "Disponible para nuevas oportunidades",
+        card: { title: "ficha", location: "Lugar", now: "Ahora", nowValue: "OneCommerce · Laravel, React, n8n", status: "Estado", statusValue: "Abierto a híbrido y remoto", stack: "Stack", theme: "Tema" },
+        cta: "Ponerse en contacto",
+        cv: "Ver experiencia",
+      },
+      about: {
+        title: "Sobre mí",
+        p1: "Trabajo como desarrollador web desde 2024, con una startup española, e-commerce y proyectos de integración. Mi día a día incluye mantener y evolucionar sistemas en Laravel, crear interfaces en React y automatizar procesos con n8n.",
+        p2: "Mi objetivo es aplicar lo que sé de desarrollo web para crear soluciones eficientes, escalables y fáciles de mantener, aportando al equipo y a los proyectos de la empresa.",
+        p3: "También fui profesor de informática, lo que me enseñó a explicar bien mi trabajo y a colaborar con personas de áreas distintas.",
+      },
+      experience: {
+        title: "Experiencia",
+        present: "Actual",
+        jobs: [
+          {
+            company: "OneCommerce",
+            context: "Startup, España · Remoto",
+            role: "Desarrollador Web (autónomo)",
+            period: "Feb 2026 — Actualidad",
+            points: [
+              "Mantenimiento y evolución continua de aplicaciones PHP/Laravel, con nuevas funcionalidades y optimización de código heredado.",
+              "Soluciones con Node.js y React, además de integraciones y automatización de procesos con n8n.",
+              "Gestión, mantenimiento y actualización de proyectos WordPress estructurados con Composer.",
+            ],
+          },
+          {
+            company: "Alfa Cursos Profissionalizantes",
+            context: "Pacajus, CE",
+            role: "Profesor de Informática",
+            period: "Oct 2025 — Ene 2026",
+            points: [
+              "Actividades prácticas y contenidos introductorios de informática y paquete Office para clases de distintas áreas.",
+              "Capacitaciones iniciales sobre el uso de computadoras y apoyo didáctico a cursos profesionalizantes.",
+            ],
+          },
+          {
+            company: "Somos Octa",
+            context: "São Paulo, SP",
+            role: "Desarrollador Web",
+            period: "May 2025 — Nov 2025",
+            points: [
+              "Mantenimiento y evolución del proyecto Empório Naval: nuevas funcionalidades, correcciones y mejoras estructurales.",
+              "Reestructuración de la lógica de pagos para soportar múltiples pasarelas, incluida una pasarela interna.",
+            ],
+          },
+          {
+            company: "OneCommerce",
+            context: "Startup, España · Remoto",
+            role: "Desarrollador Web",
+            period: "Sep 2024 — Ene 2025",
+            points: ["Desarrollo de la API de OneChat, aplicación de mensajería en tiempo real con comunicación vía WebSocket."],
+          },
+        ],
+      },
+      skills: {
+        title: "Habilidades",
+        groups: [
+          { name: "Lenguajes", items: ["HTML", "CSS", "JavaScript", "PHP", "C#", "MySQL"] },
+          { name: "Frameworks y herramientas", items: ["Laravel", ".NET", "React.js", "Node.js", "Tailwind CSS", "Bootstrap", "WordPress", "n8n"] },
+        ],
+      },
+      education: {
+        title: "Formación",
+        items: [
+          { degree: "Análisis y Desarrollo de Sistemas (ADS)", school: "Uninassau", period: "2025 — 2027", note: "En curso" },
+          { degree: "Técnico en Desarrollo de Sistemas", school: "EEEP Adolfo Ferreira de Sousa", period: "2022 — 2024", note: "" },
+        ],
+      },
+      contact: {
+        title: "Hablemos",
+        text: "Estoy abierto a oportunidades híbridas o remotas. Si tienes un proyecto o una vacante en la que pueda ayudar, escríbeme.",
+        email: "Correo",
+        phone: "Teléfono",
+        location: "Ubicación",
+      },
+      footer: { rights: "Wesley dos Santos Silva" },
+    },
+  },
 };
 
 i18n
-    .use(LanguageDetector)
-    .use(initReactI18next)
-    .init({
-        resources,
-        fallbackLng: 'pt',
-        interpolation: {
-            escapeValue: false
-        }
-    });
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources,
+    fallbackLng: "pt",
+    supportedLngs: ["pt", "en", "es"],
+    nonExplicitSupportedLngs: true,
+    interpolation: { escapeValue: false },
+  });
 
 export default i18n;

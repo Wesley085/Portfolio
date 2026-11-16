@@ -1,111 +1,79 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { LanguageSwitcher } from "../LanguageSwitcher";
+import { Moon, Sun } from "lucide-react";
+
+const languages = ["pt", "en", "es"] as const;
 
 export const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const current = (i18n.resolvedLanguage || "pt").slice(0, 2);
+  const [dark, setDark] = useState(true);
 
-  const navItems = [
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !dark;
+    document.documentElement.classList.toggle("dark", next);
+    setDark(next);
+    try {
+      localStorage.setItem("theme", next ? "dark" : "light");
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const items = [
     { label: t("nav.about"), href: "#sobre" },
-    { label: t("nav.skills"), href: "#skills" },
+    { label: t("nav.skills"), href: "#habilidades" },
     { label: t("nav.experience"), href: "#experiencia" },
+    { label: t("nav.education"), href: "#formacao" },
     { label: t("nav.contact"), href: "#contato" },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-        ? "bg-background/90 backdrop-blur-md border-b border-border shadow-lg"
-        : "bg-transparent"
-        }`}
-    >
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="font-mono text-primary text-lg font-semibold tracking-wider">
-          &lt;wesley.<span className="text-foreground">dev</span>/&gt;
+    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+        <a href="#" className="font-display text-xl">
+          wesley<span className="text-primary">.</span>dev
         </a>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          <ul className="flex items-center gap-8">
-            {navItems.map((item, i) => (
-              <li key={item.label} className="min-w-[100px] text-center">
-                <a
-                  href={item.href}
-                  className="font-mono text-sm text-muted-foreground hover:text-primary transition-colors duration-200 group"
-                >
-                  <span className="text-primary text-xs mr-1">{String(i + 1).padStart(2, "0")}.</span>
+        <nav className="flex items-center gap-5 text-sm">
+          <ul className="hidden items-center gap-6 lg:flex">
+            {items.map((item) => (
+              <li key={item.href}>
+                <a href={item.href} className="text-muted-foreground transition-colors hover:text-foreground">
                   {item.label}
                 </a>
               </li>
             ))}
           </ul>
-          <LanguageSwitcher />
-          <a
-            href="https://wa.me/85992243723"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-primary text-primary font-mono text-sm px-4 py-2 rounded hover:bg-primary hover:text-primary-foreground transition-all duration-200"
-          >
-            {t("nav.talkToMe")}
-          </a>
-        </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center gap-4 md:hidden">
-          <LanguageSwitcher />
-          <button
-            className="text-primary p-2"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <div className="space-y-1.5">
-              <span className={`block h-0.5 w-6 bg-primary transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-              <span className={`block h-0.5 w-6 bg-primary transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-              <span className={`block h-0.5 w-6 bg-primary transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-            </div>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-card/95 backdrop-blur-md border-b border-border px-6 py-6">
-          <ul className="space-y-4">
-            {navItems.map((item, i) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  className="font-mono text-muted-foreground hover:text-primary transition-colors block"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <span className="text-primary text-xs mr-2">{String(i + 1).padStart(2, "0")}.</span>
-                  {item.label}
-                </a>
-              </li>
-            ))}
-            <li>
-              <a
-                href="https://wa.me/85992243723"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block border border-primary text-primary font-mono text-sm px-4 py-2 rounded hover:bg-primary hover:text-primary-foreground transition-all duration-200 mt-2"
-                onClick={() => setMenuOpen(false)}
+          <div className="flex items-center gap-1 font-mono text-xs" role="group" aria-label="Language">
+            {languages.map((lng) => (
+              <button
+                key={lng}
+                onClick={() => i18n.changeLanguage(lng)}
+                aria-pressed={current === lng}
+                className={`px-1.5 py-1 uppercase transition-colors ${
+                  current === lng ? "text-primary underline underline-offset-4" : "text-muted-foreground hover:text-foreground"
+                }`}
               >
-                {t("nav.talkToMe")}
-              </a>
-            </li>
-          </ul>
-        </div>
-      )}
-    </nav>
+                {lng}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={toggleTheme}
+            aria-label={t("hero.card.theme")}
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+        </nav>
+      </div>
+    </header>
   );
 };
-

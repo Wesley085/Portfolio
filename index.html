@@ -1,15 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
+  <meta charset="UTF-8" />
+  <script>
+    try {
+      var t = localStorage.getItem("theme");
+      if (t !== "light") document.documentElement.classList.add("dark");
+    } catch (e) {
+      document.documentElement.classList.add("dark");
+    }
+  </script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio - Wesley Santos </title>
-  <meta name="description" content="Portfolio - Wesley Santos " />
-  <meta name="author" content="Wesley Santos " />
+  <title>Wesley Santos — Desenvolvedor Web</title>
+  <meta name="description" content="Portfólio de Wesley dos Santos Silva, desenvolvedor web (PHP/Laravel, React, Node.js)." />
+  <meta name="author" content="Wesley dos Santos Silva" />
 
-  <meta property="og:title" content="Portfolio - Wesley Santos " />
-  <meta property="og:description" content="Portfolio - Wesley Santos " />
+  <meta property="og:title" content="Wesley Santos — Desenvolvedor Web" />
+  <meta property="og:description" content="Wesley Santos — Desenvolvedor Web" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/image.png" />
 

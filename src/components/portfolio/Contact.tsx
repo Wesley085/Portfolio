@@ -1,79 +1,48 @@
-import { useEffect, useRef, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { ArrowUpRight } from "lucide-react";
+import { Section } from "./Section";
+
+const EMAIL = "wesleysantos103094@gmail.com";
 
 export const Contact = () => {
   const { t } = useTranslation();
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setVisible(true),
-      { threshold: 0.2 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
+  const links = [
+    { label: "LinkedIn", value: "in/wesleysanto", href: "https://www.linkedin.com/in/wesleysanto" },
+    { label: "GitHub", value: "Wesley085", href: "https://github.com/Wesley085" },
+    { label: "WhatsApp", value: "(85) 99224-3723", href: "https://wa.me/5585992243723" },
+  ];
 
   return (
-    <section id="contato" className="py-24 px-6 bg-card/30">
-      <div
-        ref={ref}
-        className={`max-w-3xl mx-auto text-center transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+    <Section id="contato" number="05" title={t("contact.title")}>
+      <p className="max-w-xl text-lg text-muted-foreground">{t("contact.text")}</p>
+
+      <a
+        href={`mailto:${EMAIL}`}
+        className="group mt-8 inline-flex flex-wrap items-center gap-3 font-display text-[clamp(1.5rem,4.2vw,3rem)] leading-tight break-all"
       >
-        <div className="flex items-center justify-center gap-4 mb-12">
-          <div className="flex-1 h-px bg-border max-w-xs" />
-          <span className="font-mono text-primary text-sm whitespace-nowrap">{t("contact.sectionTitle")}</span>
-          <div className="flex-1 h-px bg-border max-w-xs" />
-        </div>
+        <span className="link-underline">{EMAIL}</span>
+        <ArrowUpRight className="h-8 w-8 shrink-0 text-primary transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+      </a>
 
-        <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-          <Trans i18nKey="contact.title">
-            Vamos <span className="text-gradient">trabalhar juntos?</span>
-          </Trans>
-        </h2>
-
-        <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
-          <Trans i18nKey="contact.description">
-            Estou aberto a oportunidades
-            <span className="text-primary">presenciais</span>,
-            <span className="text-primary">hibridas</span> ou
-            <span className="text-primary">remotas</span>.
-            Se você tem um projeto interessante ou uma vaga disponivel,
-            minha caixa de entrada está sempre aberta!
-          </Trans>
-        </p>
-
-        <a
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=wesleysantos103094@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block bg-primary text-primary-foreground font-semibold text-lg px-8 py-4 rounded-xl hover:opacity-90 transition-all duration-200 hover:-translate-y-1 mb-12 pulse-glow"
-        >
-          {t("contact.sayHello")}
-        </a>
-
-        <div className="flex justify-center gap-8">
-          <a
-            href="https://wa.me/85992243723"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-          >
-            <span className="text-lg">📞</span>
-            <span className="font-mono text-sm">(85) 99224-3723</span>
-          </a>
-          <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=wesleysantos103094@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-          >
-            <span className="text-lg">📧</span>
-            <span className="font-mono text-sm">wesleysantos103094@gmail.com</span>
-          </a>
-        </div>
-      </div>
-    </section>
+      <ul className="mt-12 grid gap-4 sm:grid-cols-3">
+        {links.map((link) => (
+          <li key={link.label}>
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex h-full flex-col justify-between gap-6 rounded-xl border border-border bg-card/40 p-5 transition-colors hover:border-primary/60"
+            >
+              <span className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                {link.label}
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </span>
+              <span className="text-lg">{link.value}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Section>
   );
 };
